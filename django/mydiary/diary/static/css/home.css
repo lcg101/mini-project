@@ -34,6 +34,10 @@ body {
     font-size: 1.5em;
 }
 
+.navbar .heart {
+    color: red; /* 하트 색상을 빨간색으로 설정 */
+}
+
 .nav-links a {
     color: white;
     text-decoration: none;
@@ -50,8 +54,14 @@ body {
 }
 
 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.content {
     text-align: center;
-    margin-top: 50px;
 }
 
 h1 {

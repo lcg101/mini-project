@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +9,7 @@
 <body>
     <div class="navbar">
         <div class="container">
-            <h1>민경이를 위한 일기장</h1>
+            <h1>민경이를 위한 일기장 <span class="heart">&#9829;</span></h1>
             <div class="nav-links">
                 <a href="{% url 'home' %}">홈으로 가기</a>
                 <a href="{% url 'diary_list' %}">일기 목록 보기</a>
@@ -16,11 +17,12 @@
             </div>
         </div>
     </div>
-    <div class="content">
-        <h1>민경이를 위한 일기장</h1>
-        <div class="clock" id="clock"></div>
-        <div class="image">
-            <img src="{% static 'images/chunsik.webp' %}" alt="춘식이">
+    <div class="container">
+        <div class="content">
+            <div class="clock" id="clock"></div>
+            <div class="image">
+                <img src="{% static 'images/chunsik.webp' %}" alt="춘식이">
+            </div>
         </div>
     </div>
     <script>
@@ -42,5 +44,4 @@
     </script>
 </body>
 </html>
-
 
