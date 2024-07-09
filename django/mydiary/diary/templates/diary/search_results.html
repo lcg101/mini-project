@@ -1,4 +1,3 @@
-<!-- diary/templates/diary/search_results.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,7 +13,11 @@
         {% if results %}
             <ul>
                 {% for result in results %}
-                    <li>{{ result.date }} - {{ result.content|truncatewords:20 }}</li>
+                    <li>
+                        <a href="{% url 'diary_detail' result.pk %}">
+                            {{ result.date }} - {{ result.content|truncatewords:20 }}
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         {% else %}
