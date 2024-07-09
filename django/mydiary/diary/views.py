@@ -9,7 +9,16 @@ def home(request):
     return render(request, 'diary/home.html', {'now': now})
 
 def calendar(request):
-    return render(request, 'diary/calendar.html')
+    entries = DiaryEntry.objects.all()
+    entries_data = []
+    for entry in entries:
+        entry_data = {
+            'date': entry.date.strftime('%Y-%m-%d'),
+        }
+        entries_data.append(entry_data)
+    return render(request, 'diary/calendar.html', {'entries_data': entries_data})
+
+
 
 def new_entry(request):
     date = request.GET.get('date', None)

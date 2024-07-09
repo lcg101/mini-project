@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            const entries = {{ entries_data|safe }};
+            
             function renderCalendar(year, month) {
                 const firstDay = new Date(year, month).getDay();
                 const lastDate = new Date(year, month + 1, 0).getDate();
@@ -27,7 +29,10 @@
                 }
 
                 for (let i = 1; i <= lastDate; i++) {
-                    days.push(`<div class="calendar-day" data-date="${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}">${i}</div>`);
+                    let dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                    let entry = entries.find(entry => entry.date === dateString);
+                    let heartIcon = entry ? `<span class="heart-icon">&#9829;</span>` : '';
+                    days.push(`<div class="calendar-day" data-date="${dateString}">${i}${heartIcon}</div>`);
                 }
 
                 for (let i = lastDay; i < 6; i++) {
@@ -74,13 +79,20 @@
                     window.location.href = `{% url 'search' %}?q=` + query;
                 }
             });
+
+            document.querySelector('#search-query').addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    document.querySelector('#search').click();
+                }
+            });
         });
     </script>
 </head>
 <body>
     <div class="navbar">
         <div class="container">
-            <h1>민경이를 위한 일기장 <span class="heart">&#9829;</span></h1>
+            <h1>민경이를 위한 일기장</h1>
             <div class="nav-links">
                 <a href="{% url 'home' %}">홈으로 가기</a>
                 <a href="{% url 'diary_list' %}">일기 목록 보기</a>

@@ -4,7 +4,7 @@ from .models import DiaryEntry
 class DiaryEntryForm(forms.ModelForm):
     class Meta:
         model = DiaryEntry
-        fields = ['date', 'title', 'mood', 'weather', 'image', 'tags', 'content']
+        fields = ['date', 'title', 'mood', 'weather', 'image1', 'image2', 'image3', 'image4', 'image5', 'tags', 'content']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
             'mood': forms.RadioSelect(),
@@ -17,7 +17,11 @@ class DiaryEntryForm(forms.ModelForm):
             'title': '제목',
             'mood': '감정',
             'weather': '날씨',
-            'image': '이미지',
+            'image1': '이미지 1',
+            'image2': '이미지 2',
+            'image3': '이미지 3',
+            'image4': '이미지 4',
+            'image5': '이미지 5',
             'tags': '태그',
             'content': '내용',
         }
