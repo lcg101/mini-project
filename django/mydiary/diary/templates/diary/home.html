@@ -1,0 +1,46 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>민경이를 위한 일기장 - 홈</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <h1>민경이를 위한 일기장</h1>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">홈으로 가기</a>
+                <a href="{% url 'diary_list' %}">일기 목록 보기</a>
+                <a href="{% url 'calendar' %}">새 일기 쓰기</a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h1>민경이를 위한 일기장</h1>
+        <div class="clock" id="clock"></div>
+        <div class="image">
+            <img src="{% static 'images/chunsik.webp' %}" alt="춘식이">
+        </div>
+    </div>
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            seconds = seconds < 10 ? '0'+seconds : seconds;
+            var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+            document.getElementById('clock').innerHTML = strTime;
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // initial call
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,27 @@
+<!-- diary/templates/diary/search_results.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>검색 결과</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>검색 결과</h1>
+        <p>검색어: "{{ query }}"</p>
+        {% if results %}
+            <ul>
+                {% for result in results %}
+                    <li>{{ result.date }} - {{ result.content|truncatewords:20 }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>검색 결과가 없습니다.</p>
+        {% endif %}
+        <a href="{% url 'calendar' %}">달력으로 돌아가기</a>
+    </div>
+</body>
+</html>
+

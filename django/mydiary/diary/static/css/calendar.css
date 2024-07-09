@@ -1,0 +1,133 @@
+/* static/css/calendar.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #333; /* 검은색 배경 */
+    color: white;
+    padding: 15px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 1em;
+    padding: 10px 20px; /* 버튼 스타일 추가 */
+    background-color: #333; /* 검은색 배경 */
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: #555; /* 검은색 호버 효과 */
+    text-decoration: none;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.month-year {
+    font-size: 1.5em;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.calendar-header {
+    display: contents;
+    font-weight: bold;
+}
+
+.calendar-days {
+    display: contents;
+}
+
+.calendar-day, .prev-date, .next-date {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.calendar-day:hover {
+    background-color: #e0e0e0;
+}
+
+.prev-date, .next-date {
+    color: #ccc;
+}
+
+.search-bar {
+    margin-top: 20px;
+}
+
+#search-query {
+    padding: 10px;
+    font-size: 1em;
+}
+
+#search {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #333; /* 검은색 배경 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#search:hover {
+    background-color: #555; /* 검은색 호버 효과 */
+}
+
+.diary-list-link {
+    margin-top: 20px;
+}
+
+.diary-list-link a {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.diary-list-link a:hover {
+    text-decoration: underline;
+}
+

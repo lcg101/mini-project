@@ -1,0 +1,116 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>민경이를 위한 일기장 - 달력</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function renderCalendar(year, month) {
+                const firstDay = new Date(year, month).getDay();
+                const lastDate = new Date(year, month + 1, 0).getDate();
+                const lastDay = new Date(year, month, lastDate).getDay();
+                const prevLastDate = new Date(year, month, 0).getDate();
+
+                const calendarDays = document.querySelector('.calendar-days');
+                calendarDays.innerHTML = '';
+
+                const monthAndYear = document.querySelector('.month-year');
+                monthAndYear.textContent = `${year}년 ${month + 1}월`;
+
+                let days = [];
+
+                for (let i = firstDay; i > 0; i--) {
+                    days.push(`<div class="prev-date">${prevLastDate - i + 1}</div>`);
+                }
+
+                for (let i = 1; i <= lastDate; i++) {
+                    days.push(`<div class="calendar-day" data-date="${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}">${i}</div>`);
+                }
+
+                for (let i = lastDay; i < 6; i++) {
+                    days.push(`<div class="next-date">${i - lastDay + 1}</div>`);
+                }
+
+                calendarDays.innerHTML = days.join('');
+
+                document.querySelectorAll('.calendar-day').forEach(day => {
+                    day.addEventListener('click', function() {
+                        const date = this.dataset.date;
+                        window.location.href = `{% url 'new_entry' %}?date=` + date;
+                    });
+                });
+            }
+
+            const today = new Date();
+            let currentYear = today.getFullYear();
+            let currentMonth = today.getMonth();
+
+            renderCalendar(currentYear, currentMonth);
+
+            document.querySelector('.prev').addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderCalendar(currentYear, currentMonth);
+            });
+
+            document.querySelector('.next').addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderCalendar(currentYear, currentMonth);
+            });
+
+            document.querySelector('#search').addEventListener('click', function() {
+                const query = document.querySelector('#search-query').value;
+                if (query) {
+                    window.location.href = `{% url 'search' %}?q=` + query;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <h1>민경이를 위한 일기장</h1>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">홈으로 가기</a>
+                <a href="{% url 'diary_list' %}">일기 목록 보기</a>
+                <a href="{% url 'calendar' %}">새 일기 쓰기</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="calendar-nav">
+            <span class="prev">&lt; 이전 달</span>
+            <span class="month-year"></span>
+            <span class="next">다음 달 &gt;</span>
+        </div>
+        <div class="calendar">
+            <div class="calendar-header">
+                <div>일</div>
+                <div>월</div>
+                <div>화</div>
+                <div>수</div>
+                <div>목</div>
+                <div>금</div>
+                <div>토</div>
+            </div>
+            <div class="calendar-days"></div>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search-query" placeholder="태그 또는 내용을 입력하세요">
+            <button id="search">검색</button>
+        </div>
+    </div>
+</body>
+</html>
+
+

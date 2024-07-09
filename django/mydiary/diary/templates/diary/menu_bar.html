@@ -1,0 +1,21 @@
+<!-- diary/templates/diary/menu_bar.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}일기장{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">홈</a></li>
+                <li><a href="{% url 'new_entry' %}">새 일기 쓰기</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block contents %}{% endblock %}
+</body>
+</html>
+
