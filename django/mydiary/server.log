@@ -1,0 +1,285 @@
+nohup: ignoring input
+Watching for file changes with StatReloader
+[09/Jul/2024 06:57:53] "GET /new/?date=2024-07-03 HTTP/1.1" 200 2646
+[09/Jul/2024 06:57:53] "GET /static/css/diary.css HTTP/1.1" 304 0
+[09/Jul/2024 06:57:54] "GET /new/?date=2024-07-03 HTTP/1.1" 200 2646
+[09/Jul/2024 06:57:54] "GET /new/?date=2024-07-03 HTTP/1.1" 200 2646
+[09/Jul/2024 06:57:56] "GET /new/?date=2024-07-03 HTTP/1.1" 200 2646
+[09/Jul/2024 06:58:00] "GET / HTTP/1.1" 200 1590
+[09/Jul/2024 06:58:00] "GET /static/css/home.css HTTP/1.1" 200 1401
+[09/Jul/2024 06:58:00] "GET /static/images/chunsik.webp HTTP/1.1" 304 0
+[09/Jul/2024 06:58:01] "GET /diary/ HTTP/1.1" 200 860
+[09/Jul/2024 06:58:04] "GET /diary/3/ HTTP/1.1" 200 2385
+[09/Jul/2024 06:58:04] "GET /static/css/detail.css HTTP/1.1" 304 0
+[09/Jul/2024 06:58:04] "GET /media/diary_images/%ED%99%94%EB%A9%B4_%EC%BA%A1%EC%B2%98_2024-07-09_074437_6sM7Sgg.png HTTP/1.1" 304 0
+[09/Jul/2024 06:58:06] "GET /diary/ HTTP/1.1" 200 860
+[09/Jul/2024 06:58:07] "GET /calendar/ HTTP/1.1" 200 4304
+[09/Jul/2024 06:58:07] "GET /static/css/calendar.css HTTP/1.1" 304 0
+[09/Jul/2024 06:58:09] "GET /new/?date=2024-07-10 HTTP/1.1" 200 2646
+Internal Server Error: /new/
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/root/test/django/lib64/python3.6/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'QueryDict' object has no attribute 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/test/django/lib64/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/test/django/mydiary/diary/views.py", line 23, in new_entry
+    return render(request, 'diary/new_entry.html', {'form': form})
+  File "/root/test/django/lib64/python3.6/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [date] in <QueryDict: {}>
+[09/Jul/2024 06:58:11] "POST /new/ HTTP/1.1" 500 141417
+Internal Server Error: /new/
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/root/test/django/lib64/python3.6/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'QueryDict' object has no attribute 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/test/django/lib64/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/test/django/mydiary/diary/views.py", line 23, in new_entry
+    return render(request, 'diary/new_entry.html', {'form': form})
+  File "/root/test/django/lib64/python3.6/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [date] in <QueryDict: {}>
+[09/Jul/2024 06:58:19] "POST /new/ HTTP/1.1" 500 141444
+[09/Jul/2024 06:58:41] "POST /new/ HTTP/1.1" 302 0
+[09/Jul/2024 06:58:41] "GET /diary/ HTTP/1.1" 200 1359
+[09/Jul/2024 06:58:44] "POST /diary/4/delete/ HTTP/1.1" 302 0
+[09/Jul/2024 06:58:44] "GET /diary/ HTTP/1.1" 200 860
+[09/Jul/2024 06:58:45] "POST /diary/3/delete/ HTTP/1.1" 302 0
+[09/Jul/2024 06:58:45] "GET /diary/ HTTP/1.1" 200 362
+[09/Jul/2024 06:58:46] "GET /calendar/ HTTP/1.1" 200 4304
+[09/Jul/2024 06:58:47] "GET /calendar/ HTTP/1.1" 200 4304
+[09/Jul/2024 06:58:48] "GET /calendar/ HTTP/1.1" 200 4304
+[09/Jul/2024 06:58:50] "GET /new/?date=2024-07-09 HTTP/1.1" 200 2646
+Internal Server Error: /new/
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/root/test/django/lib64/python3.6/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'QueryDict' object has no attribute 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/test/django/lib64/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/test/django/mydiary/diary/views.py", line 23, in new_entry
+    return render(request, 'diary/new_entry.html', {'form': form})
+  File "/root/test/django/lib64/python3.6/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [date] in <QueryDict: {}>
+[09/Jul/2024 06:58:53] "POST /new/ HTTP/1.1" 500 141417
+Internal Server Error: /new/
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/root/test/django/lib64/python3.6/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'QueryDict' object has no attribute 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/test/django/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/test/django/lib64/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/test/django/mydiary/diary/views.py", line 23, in new_entry
+    return render(request, 'diary/new_entry.html', {'form': form})
+  File "/root/test/django/lib64/python3.6/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 692, in resolve
+    arg_vals.append(arg.resolve(context))
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/root/test/django/lib64/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [date] in <QueryDict: {}>
+[09/Jul/2024 06:59:06] "POST /new/ HTTP/1.1" 500 141417
+/root/test/django/mydiary/diary/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 09, 2024 - 06:57:46
+Django version 3.2.25, using settings 'mydiary.settings'
+Starting development server at http://1.234.2.41:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader

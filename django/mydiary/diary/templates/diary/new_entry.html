@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>일기 작성</h1>
-        <form action="{% url 'new_entry' %}" method="POST" enctype="multipart/form-data">
+        <form id="diary-form" action="{% url 'new_entry' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="date">날짜:</label>
@@ -50,8 +50,28 @@
                 <textarea id="content" name="content" rows="10" placeholder="내용을 입력하세요">{{ form.content.value|default_if_none:'' }}</textarea>
             </div>
             <button type="submit">저장</button>
+            <button type="button" id="back-button">뒤로가기</button>
         </form>
     </div>
+    <script>
+        document.getElementById('diary-form').addEventListener('submit', function(event) {
+            let date = document.getElementById('date').value;
+            let title = document.getElementById('title').value;
+            let mood = document.querySelector('input[name="mood"]:checked');
+            let weather = document.querySelector('input[name="weather"]:checked');
+            let tags = document.getElementById('tags').value;
+            let content = document.getElementById('content').value;
+
+            if (!date || !title || !mood || !weather || !tags || !content) {
+                event.preventDefault();
+                alert('다 써!.');
+            }
+        });
+
+        document.getElementById('back-button').addEventListener('click', function() {
+            window.history.back();
+        });
+    </script>
 </body>
 </html>
 

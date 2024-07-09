@@ -58,9 +58,18 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
     background-color: #45a049;
+}
+
+button#back-button {
+    background-color: #555; /* Gray background for the back button */
+}
+
+button#back-button:hover {
+    background-color: #777; /* Darker gray on hover */
 }
 
