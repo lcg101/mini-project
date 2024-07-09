@@ -32,17 +32,21 @@ h1 {
 
 .label-group, .radio-group {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start; /* Align items to the start */
 }
 
 .radio-group label {
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 5px; /* Reduce margin to make icons closer */
 }
 
 textarea {
     width: 100%;
     resize: none;
+}
+
+input[type="text"] {
+    width: 100%; /* Make title input wider */
 }
 
 button {
