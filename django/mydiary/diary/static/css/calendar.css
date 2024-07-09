@@ -28,6 +28,10 @@ body {
     font-size: 1.5em;
 }
 
+.navbar .heart {
+    color: red; /* 하트 색상을 빨간색으로 설정 */
+}
+
 .nav-links a {
     color: white;
     text-decoration: none;
@@ -58,6 +62,19 @@ body {
 
 .month-year {
     font-size: 1.5em;
+}
+
+button.prev, button.next {
+    background-color: #333; /* 검은색 배경 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button.prev:hover, button.next:hover {
+    background-color: #555; /* 검은색 호버 효과 */
 }
 
 .calendar {
