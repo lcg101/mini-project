@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>민경이를 위한 일기장 - 새 일기 작성</title>
+    <title>일기 수정</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/diary.css' %}">
 </head>
 <body>
     <div class="container">
-        <h1>민경이의 하루</h1>
-        <form id="diary-form" action="{% url 'new_entry' %}" method="POST" enctype="multipart/form-data">
+        <h1>일기 수정</h1>
+        <form id="diary-form" action="{% url 'edit_entry' entry.pk %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="date">날짜:</label>
-                <input type="date" id="date" name="date" value="{{ form.date.value|default:request.GET.date }}">
+                <input type="date" id="date" name="date" value="{{ entry_date }}">
             </div>
             <div class="form-group">
                 <label for="title">제목:</label>
-                <input type="text" id="title" name="title" value="{{ form.title.value|default_if_none:'' }}" placeholder="오늘 하루를 한마디로 한다면?">
+                <input type="text" id="title" name="title" value="{{ form.title.value|default_if_none:entry.title }}" placeholder="제목을 입력하세요">
             </div>
             <div class="form-group">
                 <label for="mood">감정:</label>
@@ -40,35 +40,55 @@
             <div class="form-group">
                 <label for="image1">이미지 1:</label>
                 <input type="file" id="image1" name="image1" accept="image/*" onchange="previewImage(this, 'preview1')">
-                <img id="preview1" src="#" alt="이미지 1 미리보기" style="display:none; width: 300px; height: auto;" onclick="openModal(this)">
+                {% if entry.image1 %}
+                    <img id="preview1" src="{{ entry.image1.url }}" alt="이미지 1 미리보기" style="width: 150px; height: auto;" onclick="openModal(this)">
+                {% else %}
+                    <img id="preview1" src="#" alt="이미지 1 미리보기" style="display: none; width: 150px; height: auto;" onclick="openModal(this)">
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="image2">이미지 2:</label>
                 <input type="file" id="image2" name="image2" accept="image/*" onchange="previewImage(this, 'preview2')">
-                <img id="preview2" src="#" alt="이미지 2 미리보기" style="display:none; width: 300px; height: auto;" onclick="openModal(this)">
+                {% if entry.image2 %}
+                    <img id="preview2" src="{{ entry.image2.url }}" alt="이미지 2 미리보기" style="width: 150px; height: auto;" onclick="openModal(this)">
+                {% else %}
+                    <img id="preview2" src="#" alt="이미지 2 미리보기" style="display: none; width: 150px; height: auto;" onclick="openModal(this)">
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="image3">이미지 3:</label>
                 <input type="file" id="image3" name="image3" accept="image/*" onchange="previewImage(this, 'preview3')">
-                <img id="preview3" src="#" alt="이미지 3 미리보기" style="display:none; width: 300px; height: auto;" onclick="openModal(this)">
+                {% if entry.image3 %}
+                    <img id="preview3" src="{{ entry.image3.url }}" alt="이미지 3 미리보기" style="width: 150px; height: auto;" onclick="openModal(this)">
+                {% else %}
+                    <img id="preview3" src="#" alt="이미지 3 미리보기" style="display: none; width: 150px; height: auto;" onclick="openModal(this)">
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="image4">이미지 4:</label>
                 <input type="file" id="image4" name="image4" accept="image/*" onchange="previewImage(this, 'preview4')">
-                <img id="preview4" src="#" alt="이미지 4 미리보기" style="display:none; width: 300px; height: auto;" onclick="openModal(this)">
+                {% if entry.image4 %}
+                    <img id="preview4" src="{{ entry.image4.url }}" alt="이미지 4 미리보기" style="width: 150px; height: auto;" onclick="openModal(this)">
+                {% else %}
+                    <img id="preview4" src="#" alt="이미지 4 미리보기" style="display: none; width: 150px; height: auto;" onclick="openModal(this)">
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="image5">이미지 5:</label>
                 <input type="file" id="image5" name="image5" accept="image/*" onchange="previewImage(this, 'preview5')">
-                <img id="preview5" src="#" alt="이미지 5 미리보기" style="display:none; width: 300px; height: auto;" onclick="openModal(this)">
+                {% if entry.image5 %}
+                    <img id="preview5" src="{{ entry.image5.url }}" alt="이미지 5 미리보기" style="width: 150px; height: auto;" onclick="openModal(this)">
+                {% else %}
+                    <img id="preview5" src="#" alt="이미지 5 미리보기" style="display: none; width: 150px; height: auto;" onclick="openModal(this)">
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="tags">태그:</label>
-                <input type="text" id="tags" name="tags" placeholder="예: 맛집, 여행, 일상" value="{{ form.tags.value|default_if_none:'' }}">
+                <input type="text" id="tags" name="tags" placeholder="예: 맛집, 여행, 일상" value="{{ entry.tags }}">
             </div>
             <div class="form-group">
                 <label for="content">내용:</label>
-                <textarea id="content" name="content" rows="10" placeholder="오늘 하루는 어땠어?">{{ form.content.value|default_if_none:'' }}</textarea>
+                <textarea id="content" name="content" rows="10" placeholder="내용을 입력하세요">{{ entry.content }}</textarea>
             </div>
             <button type="submit">저장</button>
             <button type="button" id="back-button">뒤로가기</button>
@@ -108,20 +128,6 @@
             var modal = document.getElementById("imageModal");
             modal.style.display = "none";
         }
-
-        document.getElementById('diary-form').addEventListener('submit', function(event) {
-            let date = document.getElementById('date').value;
-            let title = document.getElementById('title').value;
-            let mood = document.querySelector('input[name="mood"]:checked');
-            let weather = document.querySelector('input[name="weather"]:checked');
-            let tags = document.getElementById('tags').value;
-            let content = document.getElementById('content').value;
-
-            if (!date || !title || !mood || !weather || !tags || !content) {
-                event.preventDefault();
-                alert('힘들게 만들었는데 다 작성해라.');
-            }
-        });
 
         document.getElementById('back-button').addEventListener('click', function() {
             window.history.back();

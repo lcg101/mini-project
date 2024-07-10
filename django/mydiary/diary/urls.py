@@ -9,5 +9,6 @@ urlpatterns = [
     path('diary/', views.diary_list, name='diary_list'),
     path('diary/<int:pk>/', views.diary_detail, name='diary_detail'),
     path('diary/<int:pk>/delete/', views.diary_delete, name='diary_delete'),
+    path('edit/<int:pk>/', views.edit_entry, name='edit_entry'),
 ]
 

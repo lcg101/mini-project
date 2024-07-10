@@ -13,11 +13,11 @@
             {% for entry in entries %}
                 <li>
                     <a href="{% url 'diary_detail' entry.pk %}">
-                        {{ entry.date }} - {{ entry.content|truncatewords:20 }}
+                        {{ entry.date }} - {{ entry.title }}
                     </a>
-                    <form action="{% url 'diary_delete' entry.pk %}" method="post" style="display:inline;">
+                    <form action="{% url 'diary_delete' entry.pk %}" method="POST" style="display:inline;">
                         {% csrf_token %}
-                        <button type="submit">삭제</button>
+                        <button type="submit" class="delete-button">삭제</button>
                     </form>
                 </li>
             {% endfor %}

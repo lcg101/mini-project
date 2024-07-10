@@ -2,20 +2,23 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>{{ entry.date }} 민경이 일기</title>
+    <title>민경이를 위한 일기장</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/detail.css' %}">
 </head>
 <body>
     <div class="container">
         <h1>{{ entry.date }} 민경이 일기</h1>
-        <p>감정: 
+        <h4><span class="label">감정:</span>  
             {% if entry.mood == 'happy' %}😊{% elif entry.mood == 'sad' %}😢{% elif entry.mood == 'angry' %}😡{% elif entry.mood == 'neutral' %}😐{% endif %}
-        </p>
-        <p>날씨: 
+        </h4>
+        <h4><span class="label">날씨:</span> 
             {% if entry.weather == 'sunny' %}☀️{% elif entry.weather == 'rainy' %}🌧️{% elif entry.weather == 'cloudy' %}☁️{% elif entry.weather == 'snowy' %}❄️{% endif %}
-        </p>
-        <p>내용: {{ entry.content }}</p>
+        </h4>
+        <h4>제목:</h4> 
+        <p>{{ entry.title }}</p>
+        <h4>내용:</h4> 
+        <p>{{ entry.content }}</p>
         {% if entry.image1 %}
             <div class="image-container">
                 <img src="{{ entry.image1.url }}" alt="이미지 1" onclick="openModal(this)">
@@ -41,7 +44,8 @@
                 <img src="{{ entry.image5.url }}" alt="이미지 5" onclick="openModal(this)">
             </div>
         {% endif %}
-        <a href="{% url 'diary_list' %}">일기 목록으로 돌아가기</a>
+        <a href="{% url 'edit_entry' entry.pk %}" class="button">수정</a>
+        <a href="{% url 'diary_list' %}" class="button">일기 목록으로 돌아가기</a>
     </div>
 
     <!-- 이미지 모달 -->

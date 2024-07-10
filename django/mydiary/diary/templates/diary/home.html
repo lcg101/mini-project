@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>민경이를 위한 일기장 - 홈</title>
+    <title>민경이를 위한 일기장 </title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
@@ -12,8 +12,8 @@
             <h1>민경이를 위한 일기장 <span class="heart">&#9829;</span></h1>
             <div class="nav-links">
                 <a href="{% url 'home' %}">홈으로 가기</a>
-                <a href="{% url 'diary_list' %}">일기 목록 보기</a>
                 <a href="{% url 'calendar' %}">새 일기 쓰기</a>
+                <a href="{% url 'diary_list' %}">일기 목록 보기</a>
             </div>
         </div>
     </div>

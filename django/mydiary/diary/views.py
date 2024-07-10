@@ -31,6 +31,23 @@ def new_entry(request):
         form = DiaryEntryForm(initial={'date': date})
     return render(request, 'diary/new_entry.html', {'form': form})
 
+def edit_entry(request, pk):
+    entry = get_object_or_404(DiaryEntry, pk=pk)
+    if request.method == 'POST':
+        form = DiaryEntryForm(request.POST, request.FILES, instance=entry)
+        if form.is_valid():
+            entry.image1 = request.FILES.get('image1', entry.image1)
+            entry.image2 = request.FILES.get('image2', entry.image2)
+            entry.image3 = request.FILES.get('image3', entry.image3)
+            entry.image4 = request.FILES.get('image4', entry.image4)
+            entry.image5 = request.FILES.get('image5', entry.image5)
+            form.save()
+            return redirect('diary_list')
+    else:
+        form = DiaryEntryForm(instance=entry)
+    return render(request, 'diary/edit_entry.html', {'form': form, 'entry': entry, 'entry_date': entry.date.strftime('%Y-%m-%d')})
+
+
 def search(request):
     query = request.GET.get('q')
     results = []
