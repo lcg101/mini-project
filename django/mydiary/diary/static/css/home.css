@@ -75,7 +75,7 @@ h1 {
 }
 
 .image img {
-    width: 300px; /* 원하는 크기로 조정 */
+    width: 600px; /* 원하는 크기로 조정 */
     height: auto;
     margin-bottom: 1em;
 }

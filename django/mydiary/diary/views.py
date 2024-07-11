@@ -3,6 +3,9 @@ from .forms import DiaryEntryForm
 from .models import DiaryEntry
 from datetime import datetime
 from django.db.models import Q
+from django.http import JsonResponse
+import json
+
 
 def home(request):
     now = datetime.now()
@@ -14,9 +17,20 @@ def calendar(request):
     for entry in entries:
         entry_data = {
             'date': entry.date.strftime('%Y-%m-%d'),
+            'memo': entry.memo,
         }
         entries_data.append(entry_data)
-    return render(request, 'diary/calendar.html', {'entries_data': entries_data})
+    return render(request, 'diary/calendar.html', {'entries_data': json.dumps(entries_data)})
+
+def save_memo(request):
+    if request.method == 'POST':
+        date = request.POST.get('date')
+        memo = request.POST.get('memo')
+        entry, created = DiaryEntry.objects.get_or_create(date=date)
+        entry.memo = memo
+        entry.save()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'fail'}, status=400)
 
 
 

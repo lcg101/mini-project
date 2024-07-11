@@ -24,6 +24,7 @@ class DiaryEntry(models.Model):
     image5 = models.ImageField(upload_to='diary_images/', blank=True, null=True, verbose_name="이미지 5")
     tags = models.CharField(max_length=100, blank=True, verbose_name="태그")
     content = models.TextField(verbose_name="내용")
+    memo = models.CharField(max_length=20, blank=True, null=True, verbose_name="메모")  # 메모 필드 추가
 
     def __str__(self):
         return f"{self.date} - {self.title}"

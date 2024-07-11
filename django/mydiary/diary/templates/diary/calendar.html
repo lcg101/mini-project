@@ -2,14 +2,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>민경이를 위한 일기장 </title>
+    <title>민경이를 위한 일기장</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const entries = {{ entries_data|safe }};
-            
+            const entries = JSON.parse('{{ entries_data|escapejs }}');
+
             function renderCalendar(year, month) {
                 const firstDay = new Date(year, month).getDay();
                 const lastDate = new Date(year, month + 1, 0).getDate();
@@ -32,7 +32,8 @@
                     let dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
                     let entry = entries.find(entry => entry.date === dateString);
                     let heartIcon = entry ? `<span class="heart-icon">&#9829;</span>` : '';
-                    days.push(`<div class="calendar-day" data-date="${dateString}">${i}${heartIcon}</div>`);
+                    let memo = entry && entry.memo ? `<span class="calendar-memo">${entry.memo}</span>` : '';
+                    days.push(`<div class="calendar-day" data-date="${dateString}"><span>${i}</span>${heartIcon}${memo}</div>`);
                 }
 
                 for (let i = lastDay; i < 6; i++) {
@@ -42,9 +43,14 @@
                 calendarDays.innerHTML = days.join('');
 
                 document.querySelectorAll('.calendar-day').forEach(day => {
-                    day.addEventListener('click', function() {
+                    day.addEventListener('click', function(event) {
                         const date = this.dataset.date;
-                        window.location.href = `{% url 'new_entry' %}?date=` + date;
+                        if (event.ctrlKey) { // Ctrl 키를 누르고 클릭하면 메모 작성 모달 열기
+                            document.querySelector('#memo-date').value = date;
+                            document.querySelector('#memo-modal').style.display = 'block';
+                        } else { // 그렇지 않으면 일기 쓰기 페이지로 이동
+                            window.location.href = `{% url 'new_entry' %}?date=` + date;
+                        }
                     });
                 });
             }
@@ -86,8 +92,89 @@
                     document.querySelector('#search').click();
                 }
             });
+
+            // 메모 모달 닫기
+            document.querySelector('#close-memo-modal').addEventListener('click', function() {
+                document.querySelector('#memo-modal').style.display = 'none';
+            });
+
+            // 메모 폼 제출 후 페이지 새로고침
+            document.querySelector('#memo-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // 기본 제출 동작 막기
+                const form = event.target;
+                const formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                }).then(response => {
+                    if (response.ok) {
+                        window.location.reload(); // 페이지 새로고침
+                    } else {
+                        response.json().then(data => {
+                            alert('메모 저장 실패: ' + data.status);
+                        });
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('메모 저장 실패');
+                });
+            });
         });
     </script>
+    <style>
+        /* 추가된 스타일 */
+        #memo-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            z-index: 1000;
+        }
+        #memo-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        #memo-modal .modal-header h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        #memo-modal .modal-header .close {
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        #memo-modal .modal-body {
+            margin-bottom: 10px;
+        }
+        #memo-modal .modal-footer {
+            text-align: right;
+        }
+
+        .calendar-day, .prev-date, .next-date {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .calendar-day span {
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
@@ -121,6 +208,22 @@
         <div class="search-bar">
             <input type="text" id="search-query" placeholder="태그 또는 내용을 입력">
             <button id="search">검색</button>
+        </div>
+    </div>
+    <div id="memo-modal">
+        <div class="modal-header">
+            <h2>메모 작성</h2>
+            <span id="close-memo-modal" class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="memo-form" method="post" action="{% url 'save_memo' %}">
+                {% csrf_token %}
+                <input type="hidden" id="memo-date" name="date">
+                <textarea id="memo-text" name="memo" rows="4" style="width: 100%;"></textarea>
+                <div class="modal-footer">
+                    <button type="submit">저장</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

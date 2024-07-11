@@ -10,5 +10,6 @@ urlpatterns = [
     path('diary/<int:pk>/', views.diary_detail, name='diary_detail'),
     path('diary/<int:pk>/delete/', views.diary_delete, name='diary_delete'),
     path('edit/<int:pk>/', views.edit_entry, name='edit_entry'),
+    path('save_memo/', views.save_memo, name='save_memo'),
 ]
 
